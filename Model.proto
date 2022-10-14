@@ -1,0 +1,54 @@
+syntax = "proto3";
+
+option csharp_namespace = "OpenBanking.Utilities.Grpc.Protos";
+
+service ModelProto {
+    rpc GetList (Parameter) returns (ModelList);
+    rpc Get (Parameter) returns (Model);
+    rpc Delete (Parameter) returns (Empty);
+    rpc Update (BaseModel) returns  (Empty);
+    rpc Create (BaseModel) returns (Empty);
+    rpc GetTypes (EmptyRequest) returns (TypeList);
+}
+
+message Empty{
+    string Code = 1;
+    string Message =2;
+}
+message EmptyRequest{
+}
+
+//Model to update and create enums
+message BaseModel {
+    string Id = 1;
+    string Name = 2;
+    int32 Index = 3;
+    bool Active = 4;
+    string Type = 5;
+}
+message ModelList {
+    string Code  = 1;
+    string Message = 2;
+    map<string,int32> List = 3;
+}
+
+message ResponseViewModel {
+    string Code = 1;
+    string Message = 2;
+}
+message Model {
+    string Code = 1;
+    string Message = 2;
+    string Name = 3;
+    int32 Index = 4;
+}
+message Parameter {
+    string Id = 1;
+    string Type = 2;
+}
+message TypeList{
+    string Code = 1;
+    string Message = 2;
+    repeated string Types = 3;
+}
+
